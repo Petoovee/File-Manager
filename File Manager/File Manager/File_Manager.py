@@ -24,15 +24,10 @@ def FileFinder (SourceFolder, TargetFolder, MaxSize):
     Folders = [SourceFolder]
     print(SourceFolder)
     for Folder in Folders:
-        print("Looking in " +Folder)
+        # print("Looking in " +Folder)
         for File in os.listdir(Folder):
             if os.path.isfile(Folder +"\\" +File) is True:
-                print("I'm true!")
-                print(os.listdir(Folder))
-                print(os.path.getsize(Folder +"\\" +File))
-                print(MaxSize)
                 if (os.path.getsize(Folder +"\\" +File)>MaxSize):
-                    print("Debug1")
                     # This way the folder is only made in case the file is actually getting moved
                     # and if it already exists it will only error out and continue
                     Folder_Copy = Folder
@@ -41,15 +36,12 @@ def FileFinder (SourceFolder, TargetFolder, MaxSize):
                     MakeDir = Folder_Copy.replace(SourceFolder_Copy, TargetFolder_Copy)
                     print(MakeDir)
                     os.system('mkdir "' +MakeDir +'"')
-                    print("Debug2")
-                    TargetFile = TargetFolder +"\\" +File
+                    TargetFile = MakeDir +"\\" +File
                     SourceFile = Folder +"\\" +File
                     Junction(SourceFile, TargetFile)
-                    print(os.path.getsize(SourceFolder +"\\" +File))
             else:
-                print("I'm false...")
                 Folders.extend([Folder +"\\" +File])
-                print("Folder " +Folder +"\\" +File +" was added to queue!")
+                # print("Folder " +Folder +"\\" +File +" was added to queue!")
 
 FileFinder(SourceFolder, TargetFolder, MaxSize)
 print(MovedCounter, " files were moved!")
