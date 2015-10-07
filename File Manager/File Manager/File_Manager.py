@@ -8,16 +8,16 @@ TargetFolder = input("\nTo which folder do you wish me to move the files?\n")
 MaxSize = int(input("\nMinimum size (MB) of file to move? \n")) *1048576
 SourceFiles = "a"
 TargetFiles = "b"
-MovedCounter = 0
+MovedCounter = int(0)
 TargetCounter = 0
 
 # Move file
 def Junction (SourceFile, TargetFile):
+    global MovedCounter
     MovedCounter = MovedCounter + 1
     os.system('move "' +SourceFile +'" "' +TargetFile +'"')
     print(TargetFile +" was moved")
     os.system('mklink "' +SourceFile +'" "' +TargetFile +'"')
-    return(MovedCounter)
 
 # Finds the files to be moved, and finds where to put them
 def FileFinder (SourceFolder, TargetFolder, MaxSize):
@@ -50,7 +50,6 @@ def FileFinder (SourceFolder, TargetFolder, MaxSize):
                 print("I'm false...")
                 Folders.extend([Folder +"\\" +File])
                 print("Folder " +Folder +"\\" +File +" was added to queue!")
-    return(MovedCounter)
 
 FileFinder(SourceFolder, TargetFolder, MaxSize)
-print(int(MovedCounter) +" files were moved!")
+print(MovedCounter, " files were moved!")
