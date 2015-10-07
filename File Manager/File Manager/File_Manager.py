@@ -1,6 +1,5 @@
 ﻿# Imports
-import os
-import re
+import os, re
 os.system('cls')
 
 # Variables
@@ -14,7 +13,7 @@ TargetCounter = 0
 
 # Move file
 def Junction (SourceFile, TargetFile):
-    MovedCounter + 1
+    MovedCounter = MovedCounter + 1
     os.system('move "' +SourceFile +'" "' +TargetFile +'"')
     print(TargetFile +" was moved")
     os.system('mklink "' +SourceFile +'" "' +TargetFile +'"')
@@ -26,36 +25,32 @@ def FileFinder (SourceFolder, TargetFolder, MaxSize):
     print(SourceFolder)
     for Folder in Folders:
         print("Looking in " +Folder)
-        try:
-            for File in os.listdir(Folder):
-                try:
-                    if os.path.isfile(Folder +"\\" +File) is True:
-                        try:
-                            if (os.path.getsize(Folder +"\\" +File)>MaxSize):
-                                try:
-                                    # This way the folder is only made in case the file is actually getting moved
-                                    # and if it already exists it will only error out and continue
-                                    Folder_Copy = Folder
-                                    SourceFolder_Copy = SourceFolder
-                                    TargetFolder_Copy = TargetFolder
-                                    MakeDir = Folder_Copy.Replace(SourceFolder_Copy, TargetFolder_Copy)
-                                    os.system('mkdir "' +MakeDir +'"')
-                                except:
-                                    continue
-                                TargetFile = TargetFolder +"\\" +File
-                                SourceFile = Folder +"\\" +File
-                                Junction(SourceFile, TargetFile)
-                                print(os.path.getsize(SourceFolder +"\\" +File))
-                        except:
-                            continue
-                    else:
-                        Folders.extend([Folder +"\\" +File])
-                        print("Folder " +File +" was added to queue!")
-                except:
-                    continue
-        except:
-            continue
+        for File in os.listdir(Folder):
+            if os.path.isfile(Folder +"\\" +File) is True:
+                print("I'm true!")
+                print(os.listdir(Folder))
+                print(os.path.getsize(Folder +"\\" +File))
+                print(MaxSize)
+                if (os.path.getsize(Folder +"\\" +File)>MaxSize):
+                    print("Debug1")
+                    # This way the folder is only made in case the file is actually getting moved
+                    # and if it already exists it will only error out and continue
+                    Folder_Copy = Folder
+                    SourceFolder_Copy = SourceFolder
+                    TargetFolder_Copy = TargetFolder
+                    MakeDir = Folder_Copy.replace(SourceFolder_Copy, TargetFolder_Copy)
+                    print(MakeDir)
+                    os.system('mkdir "' +MakeDir +'"')
+                    print("Debug2")
+                    TargetFile = TargetFolder +"\\" +File
+                    SourceFile = Folder +"\\" +File
+                    Junction(SourceFile, TargetFile)
+                    print(os.path.getsize(SourceFolder +"\\" +File))
+            else:
+                print("I'm false...")
+                Folders.extend([Folder +"\\" +File])
+                print("Folder " +Folder +"\\" +File +" was added to queue!")
     return(MovedCounter)
 
 FileFinder(SourceFolder, TargetFolder, MaxSize)
-print(str(MovedCounter) +" files were moved!")
+print(int(MovedCounter) +" files were moved!")
