@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>a876a243-a67d-4481-97cb-92f7e0f2bc86</ProjectGuid>
+    <ProjectGuid>98b306bc-30a5-4129-ba03-8f6705e7fd0d</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>File_Manager.py</StartupFile>
     <SearchPath>
