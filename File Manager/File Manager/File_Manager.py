@@ -11,7 +11,7 @@ TargetFiles = "b"
 MovedCounter = int(0)
 TargetCounter = 0
 
-# Move file
+# Moves and links files
 def Junction (SourceFile, TargetFile):
     global MovedCounter
     MovedCounter = MovedCounter + 1
@@ -22,7 +22,6 @@ def Junction (SourceFile, TargetFile):
 # Finds the files to be moved, and finds where to put them
 def FileFinder (SourceFolder, TargetFolder, MaxSize):
     Folders = [SourceFolder]
-    print(SourceFolder)
     for Folder in Folders:
 
         for File in os.listdir(Folder):
@@ -42,8 +41,10 @@ def FileFinder (SourceFolder, TargetFolder, MaxSize):
                         TargetFile = MakeDir +"\\" +File
                         SourceFile = Folder +"\\" +File
                         Junction(SourceFile, TargetFile)
+
                 else:
                     print("Skipping .symlink")
+
             else:
                 Folders.extend([Folder +"\\" +File])
 
