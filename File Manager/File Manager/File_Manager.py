@@ -1,5 +1,5 @@
 ﻿# Imports
-import os, re
+import os
 os.system('cls')
 
 # Variables
@@ -24,10 +24,13 @@ def FileFinder (SourceFolder, TargetFolder, MaxSize):
     Folders = [SourceFolder]
     print(SourceFolder)
     for Folder in Folders:
-        # print("Looking in " +Folder)
+
         for File in os.listdir(Folder):
+
             if os.path.isfile(Folder +"\\" +File) is True:
+
                 if os.path.islink(Folder +"\\" +File) is False:
+
                     if (os.path.getsize(Folder +"\\" +File)>MaxSize):
                         # This way the folder is only made in case the file is actually getting moved
                         # and if it already exists it will only error out and continue
@@ -35,7 +38,6 @@ def FileFinder (SourceFolder, TargetFolder, MaxSize):
                         SourceFolder_Copy = SourceFolder
                         TargetFolder_Copy = TargetFolder
                         MakeDir = Folder_Copy.replace(SourceFolder_Copy, TargetFolder_Copy)
-                        # print(MakeDir)
                         os.system('mkdir "' +MakeDir +'"')
                         TargetFile = MakeDir +"\\" +File
                         SourceFile = Folder +"\\" +File
@@ -44,7 +46,6 @@ def FileFinder (SourceFolder, TargetFolder, MaxSize):
                     print("Skipping .symlink")
             else:
                 Folders.extend([Folder +"\\" +File])
-                # print("Folder " +Folder +"\\" +File +" was added to queue!")
 
 FileFinder(SourceFolder, TargetFolder, MaxSize)
 print(MovedCounter, " files were moved!")
